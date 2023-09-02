@@ -3,15 +3,11 @@ import { Show, createSignal } from 'solid-js';
 
 export default function Home() {
   const [url, setUrl] = createSignal('');
-  const [adding, add] = createServerAction$(
-    async (formData, { setUrl: setUrl }) => {
-      // await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-      const { url } = Object.fromEntries(formData.entries());
-      console.log('url', url);
-      setUrl('');
-      return redirect('/');
-    },
-  );
+  const [adding, add] = createServerAction$(async (formData) => {
+    // await new Promise((resolve, reject) => setTimeout(resolve, 3000));
+    const { url } = Object.fromEntries(formData.entries());
+    return redirect('/');
+  });
 
   return (
     <main class='flex w-full flex-col p-10'>
